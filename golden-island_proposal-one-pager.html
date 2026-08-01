@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Proposal | Golden Island Day Spa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#F6F1E7;
+    --sand-2:#EFE6D3;
+    --ocean-deep:#0D3B4F;
+    --ocean:#14586F;
+    --ocean-light:#2D7A92;
+    --ink:#1E2B2F;
+    --ink-soft:#4A5A5E;
+    --coral:#C96A45;
+    --coral-dark:#A8532F;
+    --line:rgba(30,43,47,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Jost', sans-serif;
+    color:var(--ink);
+    background:#E9E2D0;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+  }
+  .page{
+    max-width:850px;
+    margin:30px auto;
+    background:var(--sand);
+    padding:52px 60px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.08);
+  }
+
+  /* Header */
+  .doc-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    border-bottom:2px solid var(--ocean-deep);
+    padding-bottom:18px;
+    margin-bottom:28px;
+  }
+  .doc-header .brand-name{
+    font-size:30px;
+    color:var(--ink);
+  }
+  .doc-header .brand-sub{
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--ocean);
+    margin-top:4px;
+  }
+  .doc-header .doc-label{
+    text-align:right;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--coral-dark);
+  }
+
+  /* Hero statement */
+  .hook{
+    background:var(--ocean-deep);
+    color:#fff;
+    padding:22px 28px;
+    border-radius:4px;
+    margin-bottom:30px;
+  }
+  .hook .eyebrow{
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:#FFE3D1;
+    margin-bottom:8px;
+  }
+  .hook p{
+    font-size:19px;
+    font-family:'Cormorant Garamond', serif;
+    line-height:1.4;
+  }
+
+  /* Section titles */
+  .section{ margin-bottom:28px; }
+  .section h2{
+    font-size:20px;
+    color:var(--ink);
+    margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section h2::before{
+    content:'';
+    width:20px; height:1px;
+    background:var(--coral);
+    display:inline-block;
+  }
+
+  /* Comparison table */
+  .compare{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13.5px;
+  }
+  .compare th{
+    text-align:left;
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ocean);
+    padding:8px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  .compare td{
+    padding:10px 12px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  .compare .row-label{
+    font-weight:500;
+    color:var(--ink);
+    width:26%;
+  }
+  .compare .bad{
+    color:var(--coral-dark);
+  }
+  .compare .bad::before{ content:'✕  '; }
+  .compare .good{
+    color:var(--ocean-deep);
+  }
+  .compare .good::before{ content:'✓  '; }
+
+  /* Value grid */
+  .value-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .value-card{
+    background:var(--sand-2);
+    border-radius:4px;
+    padding:16px 18px;
+  }
+  .value-card .v-title{
+    font-family:'Cormorant Garamond', serif;
+    font-size:16.5px;
+    color:var(--coral-dark);
+    margin-bottom:6px;
+  }
+  .value-card .v-body{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    line-height:1.55;
+  }
+
+  /* Investment band */
+  .invest{
+    display:flex;
+    gap:20px;
+    background:var(--ocean-deep);
+    color:var(--sand);
+    border-radius:4px;
+    padding:22px 28px;
+    margin-bottom:28px;
+  }
+  .invest .col{ flex:1; }
+  .invest .k{
+    font-size:10.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:#A8C4CE;
+    margin-bottom:6px;
+  }
+  .invest .v{
+    font-family:'Cormorant Garamond', serif;
+    font-size:22px;
+  }
+  .invest .sub{
+    font-size:11.5px;
+    color:#CFE0E2;
+    margin-top:4px;
+  }
+
+  /* Footer */
+  .doc-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-top:1px solid var(--line);
+    padding-top:16px;
+    font-size:11.5px;
+    color:var(--ink-soft);
+  }
+  .doc-footer .cta{
+    color:var(--coral-dark);
+    font-weight:500;
+  }
+
+  @media print{
+    body{ background:#fff; }
+    .page{ box-shadow:none; margin:0; padding:36px 40px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="page">
+
+    <div class="doc-header">
+      <div>
+        <div class="brand-name">Golden Island Day Spa</div>
+        <div class="brand-sub">Napa, California</div>
+      </div>
+      <div class="doc-label">Website Redesign Proposal</div>
+    </div>
+
+    <div class="hook">
+      <div class="eyebrow">The opportunity</div>
+      <p>Your current site captures the tranquil island feel guests love, but the phone number is hard to read against the ocean background, the layout feels dated, and there's no way to see the space online before walking in. A refresh keeps the vibe your guests already know — just easier to act on.</p>
+    </div>
+
+    <div class="section">
+      <h2>Old site vs. new site</h2>
+      <table class="compare">
+        <tr>
+          <th>Area</th>
+          <th>Current site</th>
+          <th>New site</th>
+        </tr>
+        <tr>
+          <td class="row-label">Phone number</td>
+          <td class="bad">Baked into the header photo — low contrast against the sky, can't be tapped to call</td>
+          <td class="good">Live, tappable number in a warm accent color on every page — sticky in the header</td>
+        </tr>
+        <tr>
+          <td class="row-label">Pricing</td>
+          <td class="bad">Same price list repeated on two separate pages</td>
+          <td class="good">One clear, organized pricing section with a "Most popular" package highlighted</td>
+        </tr>
+        <tr>
+          <td class="row-label">Facilities</td>
+          <td class="bad">Unlabeled photo grid — guests can't tell what they're looking at</td>
+          <td class="good">Captioned gallery (treatment room, reception, lounge) that builds trust before they arrive</td>
+        </tr>
+        <tr>
+          <td class="row-label">Visual design</td>
+          <td class="bad">Color palette feels scattered across pages</td>
+          <td class="good">One consistent ocean-and-sand palette, type, and layout system site-wide</td>
+        </tr>
+        <tr>
+          <td class="row-label">Mobile experience</td>
+          <td class="bad">No mobile menu — navigation disappears entirely on phones</td>
+          <td class="good">Dedicated mobile menu, tested and working on small screens</td>
+        </tr>
+        <tr>
+          <td class="row-label">Location &amp; hours</td>
+          <td class="bad">Address and map feel like an afterthought</td>
+          <td class="good">Embedded map alongside hours and a one-tap call button</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Why this matters for business</h2>
+      <div class="value-grid">
+        <div class="value-card">
+          <div class="v-title">More calls, less friction</div>
+          <div class="v-body">Since online booking isn't available, the phone number is the entire path to a booking. Making it legible and tappable on every page directly converts more visitors into calls.</div>
+        </div>
+        <div class="value-card">
+          <div class="v-title">A more premium first impression</div>
+          <div class="v-body">One consistent palette, typography, and layout across every page signals a polished, established business — especially to first-time visitors still comparing options nearby.</div>
+        </div>
+        <div class="value-card">
+          <div class="v-title">Builds trust before they call</div>
+          <div class="v-body">Captioned photos of the actual treatment rooms and reception area help guests feel confident booking before they've ever walked in the door.</div>
+        </div>
+        <div class="value-card">
+          <div class="v-title">Works for "massage near me" searches</div>
+          <div class="v-body">Most local searches happen on a phone. The redesign includes a working mobile menu and a layout built and tested for smaller screens.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="invest">
+      <div class="col">
+        <div class="k">Typical market cost</div>
+        <div class="v">$2,500 – $6,000</div>
+        <div class="sub">Small agency, same scope</div>
+      </div>
+      <div class="col">
+        <div class="k">Fair freelance rate</div>
+        <div class="v">$800 – $1,500</div>
+        <div class="sub">One-time, custom 6-page site</div>
+      </div>
+      <div class="col">
+        <div class="k">Ongoing hosting</div>
+        <div class="v">$0 / year</div>
+        <div class="sub">No monthly hosting fees required</div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Prepared for Golden Island Day Spa &middot; 1835 Jefferson St., Napa, CA</span>
+      <span class="cta">Live preview available on request</span>
+    </div>
+
+  </div>
+
+</body>
+</html>
