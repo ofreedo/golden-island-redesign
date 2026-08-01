@@ -498,31 +498,115 @@
     line-height: 1.8;
   }
 
-  /* ---------- Facilities preview ---------- */
+  /* ---------- Facilities gallery / slideshow ---------- */
   .facilities { background: var(--sand); }
-  .facility-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 150px;
-    gap: 14px;
-  }
-  .facility-grid > div {
+  .gallery {
     position: relative;
-    border-radius: 14px;
+    border-radius: 20px;
     overflow: hidden;
+    background: var(--ocean-deep);
+    box-shadow: 0 20px 48px rgba(13, 59, 79, 0.22);
   }
-  .facility-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-  .facility-grid > div:hover img { transform: scale(1.06); }
-  .facility-grid > div:nth-child(1) { grid-column: span 2; grid-row: span 2; }
-  .facility-caption {
+  .gallery-track {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    max-height: 560px;
+    margin: 0 auto;
+  }
+  .gallery-slide {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
-    padding: 10px 14px;
-    background: linear-gradient(0deg, rgba(13,59,79,0.75), transparent);
-    color: var(--white);
-    font-size: 14px;
-    letter-spacing: 0.02em;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
   }
+  .gallery-slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .gallery-caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 40px 32px 22px;
+    background: linear-gradient(0deg, rgba(8,30,40,0.85), transparent);
+    color: var(--white);
+  }
+  .gallery-caption .count {
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #ffcbb0;
+    margin-bottom: 4px;
+  }
+  .gallery-caption .label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+  }
+  .gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(13, 59, 79, 0.55);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    z-index: 3;
+  }
+  .gallery-arrow:hover { background: var(--coral); border-color: var(--coral); }
+  .gallery-arrow svg { width: 20px; height: 20px; }
+  .gallery-prev { left: 18px; }
+  .gallery-next { right: 18px; }
+  .gallery-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 18px 0 4px;
+    flex-wrap: wrap;
+  }
+  .gallery-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #d9cdae;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .gallery-dot.is-active {
+    background: var(--coral);
+    transform: scale(1.25);
+  }
+  .gallery-thumbs {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .gallery-thumb {
+    border: 2px solid transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0;
+    background: none;
+    aspect-ratio: 1;
+  }
+  .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gallery-thumb.is-active { border-color: var(--coral); }
 
   /* ---------- CTA band / Contact ---------- */
   .cta-band {
@@ -592,7 +676,8 @@
     .nav-toggle { display: flex; }
     .about .wrap, .service-grid, .price-grid, .footer-grid { grid-template-columns: 1fr; }
     .benefit-grid { grid-template-columns: repeat(2, 1fr); }
-    .facility-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-thumbs { grid-template-columns: repeat(4, 1fr); }
+    .gallery-arrow { width: 38px; height: 38px; }
     .hero h1 { font-size: 40px; }
     .contact-grid { grid-template-columns: 1fr; }
     .contact-info { text-align: center; }
@@ -679,14 +764,14 @@
 <header>
   <div class="wrap nav-inner">
     <a href="#" class="logo-mark load-in load-in-1"><span class="mark">&#9741;</span></a>
-    <nav class="load-in load-in-2">
+    <nav class="load-in load-in-2" id="primaryNav">
       <ul>
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="#benefits">Massage Benefits</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#appointment">Appointment</a></li>
-        <li><a href="#facilities">Facilities</a></li>
-        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#" class="active" data-section="home">Home</a></li>
+        <li><a href="#services" data-section="services">Services</a></li>
+        <li><a href="#benefits" data-section="benefits">Massage Benefits</a></li>
+        <li><a href="#appointment" data-section="appointment">Pricing</a></li>
+        <li><a href="#facilities" data-section="facilities">Facilities</a></li>
+        <li><a href="#contact" data-section="contact">Contact Us</a></li>
       </ul>
     </nav>
     <a href="tel:7072555363" class="nav-cta load-in load-in-3">
@@ -698,12 +783,12 @@
     </button>
   </div>
   <nav id="mobileNav" class="mobile-nav">
-    <a href="#" class="active">Home</a>
-    <a href="#benefits">Massage Benefits</a>
-    <a href="#services">Services</a>
-    <a href="#appointment">Appointment</a>
-    <a href="#facilities">Facilities</a>
-    <a href="#contact">Contact Us</a>
+    <a href="#" class="active" data-section="home">Home</a>
+    <a href="#services" data-section="services">Services</a>
+    <a href="#benefits" data-section="benefits">Massage Benefits</a>
+    <a href="#appointment" data-section="appointment">Pricing</a>
+    <a href="#facilities" data-section="facilities">Facilities</a>
+    <a href="#contact" data-section="contact">Contact Us</a>
   </nav>
 </header>
 
@@ -868,12 +953,55 @@
       <h2>Our facilities</h2>
       <p>A calm, sanitized studio in Napa's business district.</p>
     </div>
-    <div class="facility-grid reveal-group">
-      <div><img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=1000&auto=format&fit=crop" alt="Treatment room"><span class="facility-caption">Private treatment room</span></div>
-      <div><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=600&auto=format&fit=crop" alt="Reception desk"><span class="facility-caption">Reception</span></div>
-      <div><img src="https://images.unsplash.com/photo-1596178060810-72f53ce9a65c?q=80&w=600&auto=format&fit=crop" alt="Lounge"><span class="facility-caption">Relaxation lounge</span></div>
-      <div><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=600&auto=format&fit=crop" alt="Storefront"><span class="facility-caption">Storefront entrance</span></div>
-      <div><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=600&auto=format&fit=crop" alt="Massage room detail"><span class="facility-caption">Massage room</span></div>
+
+    <div class="gallery reveal" id="gallery">
+      <div class="gallery-track" id="galleryTrack">
+        <div class="gallery-slide is-active"><img src="assets/1-2.JPG" alt="Outdoor seating and entrance"></div>
+        <div class="gallery-slide"><img src="assets/1-3.JPG" alt="Reception desk"></div>
+        <div class="gallery-slide"><img src="assets/1-4.JPG" alt="Waiting lounge"></div>
+        <div class="gallery-slide"><img src="assets/1-5.JPG" alt="Reception detail"></div>
+        <div class="gallery-slide"><img src="assets/1-6.JPG" alt="Private suite"></div>
+        <div class="gallery-slide"><img src="assets/1-7.JPG" alt="Treatment room"></div>
+        <div class="gallery-slide"><img src="assets/1-8.JPG" alt="Treatment room detail"></div>
+        <div class="gallery-slide"><img src="assets/1-9.JPG" alt="Twin treatment room"></div>
+        <div class="gallery-slide"><img src="assets/1-10.JPG" alt="Foot massage lounge"></div>
+        <div class="gallery-slide"><img src="assets/1-11.JPG" alt="Relaxation room"></div>
+        <div class="gallery-slide"><img src="assets/1-12.JPG" alt="Sauna"></div>
+        <div class="gallery-slide"><img src="assets/1-13.JPG" alt="Refreshments"></div>
+        <div class="gallery-slide"><img src="assets/1-14.JPG" alt="Spa oils and hot stones"></div>
+        <div class="gallery-slide"><img src="assets/1-15.JPG" alt="Fresh towels"></div>
+
+        <button type="button" class="gallery-arrow gallery-prev" id="galleryPrev" aria-label="Previous photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+        </button>
+        <button type="button" class="gallery-arrow gallery-next" id="galleryNext" aria-label="Next photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+        </button>
+
+        <div class="gallery-caption">
+          <div class="count" id="galleryCount">1 / 14</div>
+          <div class="label" id="galleryLabel">Outdoor seating and entrance</div>
+        </div>
+      </div>
+
+      <div class="gallery-dots" id="galleryDots"></div>
+    </div>
+
+    <div class="gallery-thumbs reveal" id="galleryThumbs">
+      <button type="button" class="gallery-thumb is-active" data-index="0"><img src="assets/1-2.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="1"><img src="assets/1-3.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="2"><img src="assets/1-4.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="3"><img src="assets/1-5.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="4"><img src="assets/1-6.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="5"><img src="assets/1-7.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="6"><img src="assets/1-8.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="7"><img src="assets/1-9.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="8"><img src="assets/1-10.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="9"><img src="assets/1-11.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="10"><img src="assets/1-12.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="11"><img src="assets/1-13.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="12"><img src="assets/1-14.JPG" alt=""></button>
+      <button type="button" class="gallery-thumb" data-index="13"><img src="assets/1-15.JPG" alt=""></button>
     </div>
   </div>
 </section>
@@ -932,6 +1060,11 @@
 </footer>
 
 <script>
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+
   const revealEls = document.querySelectorAll('.reveal, .reveal-group');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -955,6 +1088,114 @@
       navToggle.setAttribute('aria-expanded', 'false');
     });
   });
+
+  const gallery = document.getElementById('gallery');
+  const slides = Array.from(gallery.querySelectorAll('.gallery-slide'));
+  const thumbs = Array.from(document.querySelectorAll('.gallery-thumb'));
+  const dotsWrap = document.getElementById('galleryDots');
+  const countEl = document.getElementById('galleryCount');
+  const labelEl = document.getElementById('galleryLabel');
+  const prevBtn = document.getElementById('galleryPrev');
+  const nextBtn = document.getElementById('galleryNext');
+  let current = 0;
+  let autoTimer = null;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'gallery-dot' + (i === 0 ? ' is-active' : '');
+    dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  const thumbsWrap = document.getElementById('galleryThumbs');
+
+  function goTo(index) {
+    slides[current].classList.remove('is-active');
+    dots[current].classList.remove('is-active');
+    thumbs[current].classList.remove('is-active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('is-active');
+    dots[current].classList.add('is-active');
+    thumbs[current].classList.add('is-active');
+
+    const thumb = thumbs[current];
+    const targetScroll = thumb.offsetLeft - (thumbsWrap.clientWidth - thumb.clientWidth) / 2;
+    thumbsWrap.scrollTo({ left: targetScroll, behavior: 'smooth' });
+
+    countEl.textContent = (current + 1) + ' / ' + slides.length;
+    labelEl.textContent = slides[current].querySelector('img').alt;
+  }
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(() => goTo(current + 1), 3500);
+  }
+  function stopAuto() {
+    if (autoTimer) clearInterval(autoTimer);
+  }
+
+  prevBtn.addEventListener('click', () => { goTo(current - 1); startAuto(); });
+  nextBtn.addEventListener('click', () => { goTo(current + 1); startAuto(); });
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      goTo(parseInt(thumb.dataset.index, 10));
+      startAuto();
+    });
+  });
+  gallery.addEventListener('mouseenter', stopAuto);
+  gallery.addEventListener('mouseleave', startAuto);
+  gallery.setAttribute('tabindex', '0');
+  gallery.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { goTo(current - 1); startAuto(); }
+    if (e.key === 'ArrowRight') { goTo(current + 1); startAuto(); }
+  });
+
+  const galleryObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const rect = entry.target.getBoundingClientRect();
+      const genuinelyVisible = entry.isIntersecting && rect.top < window.innerHeight && rect.bottom > 0;
+      if (genuinelyVisible) {
+        startAuto();
+        galleryObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+  galleryObserver.observe(gallery);
+
+  const navLinks = document.querySelectorAll('#primaryNav a, #mobileNav a');
+  const spySections = ['benefits', 'services', 'appointment', 'facilities', 'contact']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  function setActiveSection(name) {
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.dataset.section === name);
+    });
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => setActiveSection(link.dataset.section));
+  });
+
+  const sectionSpy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setActiveSection(entry.target.id);
+      }
+    });
+  }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
+  spySections.forEach(section => sectionSpy.observe(section));
+
+  const heroSection = document.querySelector('.hero');
+  const heroSpy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) setActiveSection('home');
+    });
+  }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
+  heroSpy.observe(heroSection);
 </script>
 
 </body>
