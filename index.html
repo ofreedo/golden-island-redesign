@@ -149,6 +149,39 @@
   }
   .nav-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
 
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    border-radius: 10px;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    color: var(--sand);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .nav-toggle svg { width: 22px; height: 22px; }
+
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: var(--ocean-deep);
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding: 8px 0 18px;
+  }
+  .mobile-nav.is-open { display: flex; }
+  .mobile-nav a {
+    color: #cfe4ea;
+    font-size: 17px;
+    padding: 14px 32px;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .mobile-nav a.active { color: var(--white); font-weight: 500; }
+  .mobile-nav a:last-of-type { border-bottom: none; }
+
   /* ---------- Brand banner (retouched island photo) ---------- */
   .brand-banner {
     width: 100%;
@@ -555,7 +588,8 @@
   }
 
   @media (max-width: 900px) {
-    nav ul { display: none; }
+    header nav { display: none; }
+    .nav-toggle { display: flex; }
     .about .wrap, .service-grid, .price-grid, .footer-grid { grid-template-columns: 1fr; }
     .benefit-grid { grid-template-columns: repeat(2, 1fr); }
     .facility-grid { grid-template-columns: repeat(2, 1fr); }
@@ -659,7 +693,18 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1C10.85 21 3 13.15 3 3.5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
       (707) 255-5363
     </a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/></svg>
+    </button>
   </div>
+  <nav id="mobileNav" class="mobile-nav">
+    <a href="#" class="active">Home</a>
+    <a href="#benefits">Massage Benefits</a>
+    <a href="#services">Services</a>
+    <a href="#appointment">Appointment</a>
+    <a href="#facilities">Facilities</a>
+    <a href="#contact">Contact Us</a>
+  </nav>
 </header>
 
 <section class="hero">
@@ -897,6 +942,19 @@
     });
   }, { threshold: 0.32, rootMargin: '0px' });
   revealEls.forEach(el => observer.observe(el));
+
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
 </script>
 
 </body>
